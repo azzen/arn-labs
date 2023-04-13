@@ -2,7 +2,7 @@
 title: "Supervised Learning and Speaker recognition using Neural Networks"
 author: "ANNEN Rayane, MARTINS Alexis"
 date: "12.04.2023"
-subtitle: "Apprentissage par réseaux de neurones artificiel"
+subtitle: "Apprentissage par réseaux de neurones artificiels"
 lang: "fr"
 titlepage: true
 titlepage-logo: ./figures/HEIG-Logo.png
