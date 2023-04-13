@@ -18,7 +18,7 @@ header-includes:
 Ce rapport présente le travail effectué pour le PW3. Dans ce travail pratique nous appliquons la méthodologie générale de modélisation data-driven afin de développer un algorithme capable de reconnaître des voix à partir de sons pré-enregistrés.
 
 
-Les principales caractéristiques de la voix sont le timbre, le ton, le débit et l'intonation. Pour analyser nos données sonores nous avons utilisé les MFCC (_Mel-Frequency Cepstrum Coeffcients_) afin d'obtenir les coefficients cepstraux des sons qui sont caractéristiques de la parole.
+Les principales caractéristiques de la voix sont le timbre, le ton, le débit et l'intonation. Pour analyser nos données sonores nous avons utilisé les MFCC (_Mel-Frequency Cepstrum Coefficients_) afin d'obtenir les coefficients cepstraux des sons qui sont caractéristiques de la parole.
 
 Finalement afin d'évaluer les performances du réseau nous avons utilisé la validation croisée. Dans le modèle final nous l'évaluons également avec une matrice de confusion ainsi que le F-score.
 
