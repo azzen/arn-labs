@@ -118,7 +118,7 @@ Voici les résultats obtenus pour l'erreur et le F-Score :
 - MSE test:  0.202
 - F1-Score:  0.929
 
-On peut voir que l'erreur d'entraînement est très bonne. Cependant pour l'erreur de test, celle-ci est un peu haute. On a pu remarquer que le modèle commençait à légèrement overfit et cela pourrait donc expliquer ce résultat. Finalement, on remarque que le F1-Score est tout de même assez bon.
+On peut voir que l'erreur d'entraînement est très bonne. Cependant pour l'erreur de test, celle-ci est un peu haute. On a pu remarquer que le modèle commençait a légèrement overfit et cela pourrait donc expliquer ce résultat. Finalement, on remarque que le F1-Score est tout de même assez bon.
 
 \clearpage
 
@@ -133,6 +133,42 @@ En résumé, nous avons 36 enregistrements pour les enfants, 36 pour les femmes 
 - Homme : 100
 - Femme : 010
 - Enfant : 001
+
+Pour évaluer les performances du modèle en utilisant une matrice de confusion nous avons dû effectuer des modifications dans l'algorithme fourni pour la calculer. Initialement les valeurs de sorties pouvaient être classées dans plusieurs catégories, voir pas du tout, e.g. 011. Nous avons modifié l'algorithme afin que nous prenions la valeur la plus haute à chaque fois en utilisant la méthode `np.argmax`.
+
+Ci-dessous voici se trouve le code modifié : 
+
+```python
+def compute_confusion_matrix(target, output, threshold):
+    """
+    This function computes the confusion matrix for a given set of predictions.
+    Rows are the actual class and columns are the predicted class
+    """
+    assert len(target.shape) == 2, "target must be a 2-dimensional array"
+    assert len(output.shape) == 2, "output must be a 2-dimensional array"
+
+    if target.shape[1] == 1:
+        n_classes = 2
+        target_binary = np.concatenate((target > threshold, target <= threshold), axis=1)
+    else:
+        n_classes = target.shape[1]
+        target_binary = target > threshold
+        
+    if output.shape[1] == 1:
+        output_binary = np.concatenate((output > threshold, output <= threshold), axis=1)
+    else:
+        output_maxs = [np.argmax(tup) for tup in output]
+        tuples = [[False] * n_classes for i in output_maxs]
+        for i, t in enumerate(tuples): t[output_maxs[i]] = True
+        output_binary = np.array(tuples)
+
+    confusion_matrix = np.zeros((n_classes, n_classes))
+    for t in np.arange(n_classes):
+        for o in np.arange(n_classes):
+            confusion_matrix[t,o] = np.sum(np.logical_and(target_binary[:,t], output_binary[:,o]))
+    
+    return confusion_matrix
+```
 
 ## Modèle
 
@@ -160,7 +196,7 @@ Comme dans la première partie : on test pour 100, 200, 300 epochs et 2, 4, 8, 1
     \caption{Erreur quadratique moyenne des réseaux selon le nombre de neurones pour 600 epochs}
 \end{figure}
 
-On voit que les premières observations à 100 epochs sont encore une fois un peu brouillon. Et les deux autres observations à 300 et 600 epochs sont assez proches. Nous avons donc décidé de sélectionner 300 epochs étant donné qu'îl n^y avait pas forcément d'améliorations. De plus on pourrait tendre sur de l'overfitting en voulant pousser le nombre d'epochs.
+On voit que les premières observations à 100 epochs sont encore une fois un peu brouillon. Et les deux autres observations à 300 et 600 epochs sont assez proches. Nous avons donc décidé de sélectionner 300 epochs étant donné qu'il n'y avait pas forcément d'améliorations. De plus on pourrait tendre sur de l'overfitting en voulant pousser le nombre d'epochs.
 
 \begin{figure}[H]
     \centering
@@ -200,7 +236,7 @@ Pour ce modèle, on remarque qu'autant les résultats d'entraînement comme ceux
 
 # Voix synthétisées et naturelles
 
-Pour ce modèle nous classons nos voix selon des critères différents que les deux précédents. Nous classons les voix selon si elles sont synthétisée ou bien si elles sont naturelles. Nous avons donc un problème de classification à deux classes.
+Pour ce modèle nous classons nos voix selon des critères différents que les deux précédents. Nous classons les voix selon si elles sont synthétisées ou bien si elles sont naturelles. Nous avons donc un problème de classification à deux classes.
 
 Nous avons encodés les valeurs de la manière suivante :
 
