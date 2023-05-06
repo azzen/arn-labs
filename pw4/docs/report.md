@@ -11,6 +11,8 @@ toc: true
 toc-own-page: true
 header-includes:
     - \usepackage{float}
+    - \usepackage{subfig}
+
 ---
 
 # Digit recognition from raw data
@@ -86,6 +88,7 @@ In this experiment, we use the Histogram of gradients (HOG) features to classify
 ### Hyper-parameters
 
 HOG: 
+
  - orientation count: 8
  - pixels per cell: 4
 
@@ -155,129 +158,251 @@ _________________________________________________________________
 
 ## Raw data
 
-### 100 neurones
+### 100 neurons
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/RAW_100neurones_g.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/RAW_100neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/RAW_100neurones_m.png}
+  }}%
+  \caption{Model with raw data and 100 neurons in the dense layer}
+
 \end{figure}
+
+
+### 300 neurons
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/RAW_300neurones_m.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/RAW_300neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/RAW_300neurones_m.png}
+  }}%
+  \caption{Model with raw data and 300 neurons in the dense layer}
+
 \end{figure}
 
-### 300 neurones
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/RAW_300neurones_g.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/RAW_300neurones_m.png}
-\end{figure}
 
 ### 600 neurones
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/RAW_600neurones_g.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/RAW_600neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/RAW_600neurones_m.png}
+  }}%
+  \caption{Model with raw data and 600 neurons in the dense layer}
+
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/RAW_600neurones_m.png}
-\end{figure}
+
+We can notice that the first model is indeed the most suitable for this situation. The more we increase the number of neurons, the more it overfits and the results aren't better.
+
+An overall observation of the models is they often confuse the 9 with the 4. For the last two, they also have a tendency to confuse the 5 with the 3.
 
 ## Features-based (HOG)
 
-### PIX_P_CELL 4, orientation 8, 100 neurones
+### PIX_P_CELL 4, orientation 8, 100 neurons
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/HOG_pix4_ori8_100neurones_g.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/HOG_pix4_ori8_100neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/HOG_pix4_ori8_100neurones_m.png}
+  }}%
+  \caption{Model using HOG features with 4 pixels per cell, 8 orientations and 100 neurons}
+
 \end{figure}
+
+
+### PIX_P_CELL 4, orientation 8, 300 neurons
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/HOG_pix4_ori8_100neurones_m.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/HOG_pix4_ori4_100neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/HOG_pix4_ori4_100neurones_m.png}
+  }}%
+  \caption{Model using HOG features with 4 pixels per cell, 4 orientations and 100 neurons}
+
 \end{figure}
 
-### PIX_P_CELL 4, orientation 8, 300 neurones
+
+### PIX_P_CELL 4, orientation 4, 100 neurons
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/HOG_pix4_ori4_100neurones_g.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/HOG_pix4_ori8_300neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/HOG_pix4_ori8_300neurones_m.png}
+  }}%
+  \caption{Model using HOG features with 4 pixels per cell, 8 orientations and 300 neurons}
+
 \end{figure}
+
+### PIX_P_CELL 7, orientation 8, 100 neurons
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/HOG_pix4_ori4_100neurones_m.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/HOG_pix7_ori8_100neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/HOG_pix7_ori8_100neurones_m.png}
+  }}%
+  \caption{Model using HOG features with 7 pixels per cell, 8 orientations and 100 neurons}
+
 \end{figure}
 
-### PIX_P_CELL 4, orientation 4, 100 neurones
+For us the best model is the seconde one. Compared to the others, it's one of the best in terms of performances and it doesn't seem to overfit. Models (1) and (3) are totally overfitting and the performances are not a lot better than (2). The last model is also very good, but the loss is higher than the second.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/HOG_pix4_ori8_300neurones_g.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/HOG_pix4_ori8_300neurones_m.png}
-\end{figure}
-
-### PIX_P_CELL 7, orientation 8, 100 neurones
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/HOG_pix7_ori8_100neurones_g.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/HOG_pix7_ori8_100neurones_m.png}
-\end{figure}
+For this set of models, the number 9 is clearly the worse. It often is confused as other numbers (like 3 and 4) or other numbers are confused as a 9 (like 4, 7 and 8).
 
 ## CNN
 
-### 25 neurones
+### 25 neurons
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/CNN_25neurones_g.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN_25neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN_25neurones_m.png}
+  }}%
+  \caption{Model using CNN 25 neurons in the feed forward part}
+\end{figure}
+
+### 250 neurons
+
+\begin{figure}[H]
+  \centering
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN_250neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN_250neurones_m.png}
+  }}%
+  \caption{Model using CNN 250 neurons in the feed forward part}
+\end{figure}
+
+### 500 neurons
+
+\begin{figure}[H]
+  \centering
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN_500neurones_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN_500neurones_m.png}
+  }}%
+  \caption{Model using CNN 500 neurons in the feed forward part}
+
+\end{figure}
+
+Once again the model with less neurons is the best one. Not necessarily in the performances displayed by the loss function, it's slightly higher than the rest. But at least it doesn't overfit like the two models remaining.
+
+In this set, the confusion is more spread. We can't see a particular number with a lot of failures in all the models.
+
+# Custom model with convolutional deep neural networks
+
+__Train a CNN to solve the MNIST Fashion problem, present your evolution of the errors during training and perform a test. Present a confusion matrix, accuracy, F-score and discuss your results. Are there particular fashion categories that are frequently confused?__
+
+
+## Experiments
+
+\begin{figure}[H]
+  \centering
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN2_15neurones_20ep_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN2_15neurones_20ep_m.png}
+  }}%
+  \caption{Model using CNN 15 neurons in the feed forward part and 20 epochs}
+
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/CNN_25neurones_m.png}
-\end{figure}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN2_10neurones_10ep_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN2_10neurones_10ep_m.png}
+  }}%
+  \caption{Model using CNN 10 neurons in the feed forward part and 10 epochs}
 
-### 250 neurones
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/CNN_250neurones_g.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/CNN_250neurones_m.png}
-\end{figure}
-
-### 500 neurones
-
-\begin{figure}[H]
-  \centering
-  \includegraphics{./figures/CNN_500neurones_g.png}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics{./figures/CNN_500neurones_m.png}
+  \subfloat[\centering Error graph]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN2_30neurones_20ep_g.png}
+  }}%
+  \qquad
+  \subfloat[\centering Confusion matrix]{
+  \scalebox{0.45}{%
+    \includegraphics{./figures/CNN2_30neurones_20ep_m.png}
+  }}%
+  \caption{Model using CNN 30 neurons in the feed forward part and 20 epochs}
+
 \end{figure}
+
+We notice that all the models are not very good. The best one is probably the last because it didn't have time to start overfitting like the others. The performances is clearly not the best.
+
+All the models tends to confuse tops (t-shirts, shirts, etc.).
+
 
 # General questions
 
