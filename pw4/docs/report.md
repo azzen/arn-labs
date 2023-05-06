@@ -58,3 +58,234 @@ $$
 $$
 
 where $N$ is the number of samples, $\vec{p_i}$ is the neural network output and $y_i$ is the target class index.
+
+## Shallow Neural Network
+
+For this experiment a simple shallow neural network is used. We use raw data to classify the digits.
+
+### Hyper-parameters
+
+Changed made to the model from the original: we reduced the number of neurons in the hidden layer from 300 to 100.
+
+- Epochs: 10
+- Hidden layers:
+  - 100 neurons, reLU
+- Output activation function: softmax.
+- Batch size: 128
+
+- Weights in the hidden layer: 784 * 100 + 100 = 78400 + 100 = 78500
+- Weights in the output layer = 10 * 100 + 10 = 1010
+- Total weights: 78500 + 1010 = 79510
+
+# Digit recognition from features of the input data
+
+## Shallow Neural Network
+
+In this experiment, we use the Histogram of gradients (HOG) features to classify the digits.
+
+### Hyper-parameters
+
+HOG: 
+ - orientation count: 8
+ - pixels per cell: 4
+
+- Epochs: 10
+- Hidden layers:
+  - 100 neurons, reLU
+- Output activation function: softmax.
+- Batch size: 128
+
+- Weights in the hidden layer: 392 * 200 + 200 = 78400 + 200 = 78600
+- Weights in the output layer = 10 * 200 + 10 = 2010
+- Total weights : 78600 + 2010 = 80610
+
+# Convolutional neural network digit recognition
+
+## Deep Convolutional Neural Network
+
+- Epochs: 10
+- Batch size: 128
+
+- Hidden layers:
+  - Convolutional 2D: 5x5 
+  - MaxPooling 2D: pool size: 2x2
+  - Convolutional 2D: 5x5
+  - MaxPooling 2D: pool size: 2x2
+  - Convolutional 2D: 3x3
+  - MaxPooling 2D: 2x2
+  - Flatten layer
+  - Dense (25 neurons), activation function: reLU
+
+Output: 10 neurons, activation function: softmax
+
+Model complexity :
+
+```
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ l0 (InputLayer)             [(None, 28, 28, 1)]       0         
+                                                                 
+ l1 (Conv2D)                 (None, 28, 28, 9)         234       
+                                                                 
+ l1_mp (MaxPooling2D)        (None, 14, 14, 9)         0         
+                                                                 
+ l2 (Conv2D)                 (None, 14, 14, 9)         2034      
+                                                                 
+ l2_mp (MaxPooling2D)        (None, 7, 7, 9)           0         
+                                                                 
+ l3 (Conv2D)                 (None, 7, 7, 16)          1312      
+                                                                 
+ l3_mp (MaxPooling2D)        (None, 3, 3, 16)          0         
+                                                                 
+ flat (Flatten)              (None, 144)               0         
+                                                                 
+ l4 (Dense)                  (None, 25)                3625      
+                                                                 
+ l5 (Dense)                  (None, 10)                260       
+                                                                 
+=================================================================
+Total params: 7,465
+Trainable params: 7,465
+Non-trainable params: 0
+_________________________________________________________________
+```
+
+# Experiments
+
+## Raw data
+
+### 100 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/RAW_100neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/RAW_300neurones_m.png}
+\end{figure}
+
+### 300 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/RAW_300neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/RAW_300neurones_m.png}
+\end{figure}
+
+### 600 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/RAW_600neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/RAW_600neurones_m.png}
+\end{figure}
+
+## Features-based (HOG)
+
+### PIX_P_CELL 4, orientation 8, 100 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/HOG_pix4_ori8_100neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/HOG_pix4_ori8_100neurones_m.png}
+\end{figure}
+
+### PIX_P_CELL 4, orientation 8, 300 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/HOG_pix4_ori4_100neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/HOG_pix4_ori4_100neurones_m.png}
+\end{figure}
+
+### PIX_P_CELL 4, orientation 4, 100 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/HOG_pix4_ori8_300neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/HOG_pix4_ori8_300neurones_m.png}
+\end{figure}
+
+### PIX_P_CELL 7, orientation 8, 100 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/HOG_pix7_ori8_100neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/HOG_pix7_ori8_100neurones_m.png}
+\end{figure}
+
+## CNN
+
+### 25 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/CNN_25neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/CNN_25neurones_m.png}
+\end{figure}
+
+### 250 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/CNN_250neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/CNN_250neurones_m.png}
+\end{figure}
+
+### 500 neurones
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/CNN_500neurones_g.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{./figures/CNN_500neurones_m.png}
+\end{figure}
+
+# General questions
+
+__Do the deep neural networks have much more “capacity” (i.e., do they have more
+weights?) than the shallow ones? explain with one example__
+
+Yes, deep neural networks generally have much more capacity than shallow ones, as they have more layers and consequently more weights. 
+
+Counterintuitively, it is observed that the shallow model has many more parameters than the deep model. This is because a shallow model is heavily interconnected, which increases the number of parameters.
+
+We can use the example of the laboratory where the shallow model has 10 times more parameters than the deep one.
