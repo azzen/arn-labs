@@ -258,6 +258,7 @@ First, let's analyze the features that the model focuses on to make its predicti
 We noticed there are some image where the focus is not on the duck but rather on the background.
 
 We think there are two main reasons:
+ 
  - the small number of examples
  - most examples show ducks in lakes or rivers
 
@@ -268,6 +269,7 @@ The model could have learned that the background is also important to classify t
 ## Misclassified images
 
 When we tried different models there was mainly two cases that could happen.
+ 
  - Parts of mallard ducks example were misclassified as northern shoveler ducks and vice-versa. It could possibly come from their heads, they are similar colorwise.
  - This case was very rare compared to the second case which is having one particular image of a northern shoveler duck being misclassified as a tufted duck.
 
@@ -297,9 +299,9 @@ Plus with the grad-cam view, we observe the model focuses on the eye of the duck
 
 We could improve the dataset by adding more examples:
 
-- More images: Having more ducks in the dataset with different angles and different backgrounds. Also we can think about different environments with for example less light, etc.
-- Cleaning watermarks and texts: it wasn't a problem for this particular case, but it could have been a problem if the model started to focus on the watermarks. The solution is to remove them from the images or remove the problematic images from the dataset.
-- Taking images directly ourselves instead of using the web: the images from internet are not always the best quality which can alter the performances of the model.
+ - More images: Having more ducks in the dataset with different angles and different backgrounds. Also we can think about different environments with for example less light, etc.
+ - Cleaning watermarks and texts: it wasn't a problem for this particular case, but it could have been a problem if the model started to focus on the watermarks. The solution is to remove them from the images or remove the problematic images from the dataset.
+ - Taking images directly ourselves instead of using the web: the images from internet are not always the best quality which can alter the performances of the model.
 
 ## Classes confusion
 
